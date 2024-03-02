@@ -1,6 +1,8 @@
-const loadData = async () => {
+const loadData = async (value = '') => {
 
-    const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
+    pageLoading(true);
+
+    const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${value}`);
 
     const data = await response.json();
 
@@ -8,15 +10,15 @@ const loadData = async () => {
 
     loadPost(originalData);
 
-
 }
 
 const loadPost = (data) => {
 
+    const discussPrint = document.getElementById('discuss-print');
+    discussPrint.textContent = '';
+
     data.forEach(element => {
         // console.log(element);
-
-        const discussPrint = document.getElementById('discuss-print');
 
         const div = document.createElement('div');
 
@@ -53,13 +55,14 @@ const loadPost = (data) => {
                         <h6>${element.posted_time}</h6>
                     </div>
             </div>
-            <div class="flex gap-x-3 items-center cursor-pointer" onclick="markAsRead('${element.title}','${element.view_count}')">
+            <div class="flex gap-x-3 items-center cursor-pointer" onclick='markAsRead("${element.title}",${element.view_count})'>
                 <img class="w-7 h-7" src="images/emailicon.png" alt="...Loading" id="mark-read">
             </div>
         </div>                        
         `;
 
         discussPrint.appendChild(div);
+        pageLoading(false);
 
     });
 }
@@ -75,7 +78,7 @@ const markAsRead = (title, view) => {
     div.className = 'bg-white p-4 flex justify-between items-center rounded-2xl';
 
     div.innerHTML = `
-    <h4 class="text-base font-semibold w-52 leading-6">'${title}'</h4>
+    <h4 class="text-base font-semibold w-52 leading-6">${title}</h4>
     <div class="flex items-center justify-between gap-x-2 text-neutral-500">
         <img class="w-7 h-7" src="images/eyeicon.png" alt="...Loading">
         <h6 class="font-inter text-base font-normal">${view}</h6>
@@ -99,37 +102,21 @@ document.addEventListener('click', function (event) {
 
 })
 
-// const searchByCategory = async() =>{
-//     const response = await fetch( 'https://openapi.programming-hero.com/api/retro-forum/posts?category=coding');
-//     const data = await response.json();
-//     data.posts.forEach(element => {
-//         const inputValue = document.getElementById( 'search-box' ).value;
+const searchByCategory = () => {
+    const inputValue = document.getElementById('search-box').value;
+    loadData(inputValue);
+    pageLoading(true);
+}
 
-//         if (element.category === inputValue) {
-//             loadPost();
-//         }
-//     });
-// }
 
-// const onlineStatus = (status) => {
+function pageLoading(isLoading) {
+    const pageOnLoad = document.getElementById('pageOnLoad');
 
-//     const online = document.getElementById('greenSignal');
-
-//     if (element.isActive === true) {
-//         online.classList.add('bg-green-500');
-//     } else {
-//         online.classList.add('bg-red-500');
-//     }
-
-//     console.log(status);
-// }
-
-// const online = document.getElementById('greenSignal');
-
-//         if (element.isActive === true) {
-//             online.classList.add('bg-green-500');
-//         } else {
-//             online.classList.add('bg-red-500');
-//         }
+    if (isLoading === true) {
+        pageOnLoad.classList.remove('hidden');
+    }else{
+        pageOnLoad.classList.add('hidden');
+    }
+}
 
 loadData();
