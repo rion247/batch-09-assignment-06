@@ -109,7 +109,6 @@ const searchByCategory = () => {
     pageLoading(true);
 }
 
-
 function pageLoading(isLoading) {
     const pageOnLoad = document.getElementById('pageOnLoad');
 
