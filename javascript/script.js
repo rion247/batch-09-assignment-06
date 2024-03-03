@@ -14,11 +14,13 @@ const loadData = async (value = '') => {
 
 const loadPost = (data) => {
 
+    pageLoading(false);
+
     const discussPrint = document.getElementById('discuss-print');
     discussPrint.textContent = '';
 
+
     data.forEach(element => {
-        // console.log(element);
 
         const div = document.createElement('div');
 
@@ -28,7 +30,7 @@ const loadPost = (data) => {
         <div class="relative bg-white">
             <div class="w-[72px] h-[72px] flex justify-center items-center"><img
                 src="${element.image}" alt="...Loading" class="rounded-2xl"></div>
-            <div id="greenSignal" class="rounded-full w-[18px] h-[18px] absolute -right-2 -top-1">
+            <div id="greenSignal" class="rounded-full w-[15px] h-[15px] absolute -right-1 -top-1 ${element.isActive ? 'bg-green-600' : 'bg-red-600'} ">
             </div>
         </div>
         <div class="flex-1">
@@ -61,8 +63,7 @@ const loadPost = (data) => {
         </div>                        
         `;
 
-        discussPrint.appendChild(div);
-        pageLoading(false);
+        discussPrint.appendChild(div);      
 
     });
 }
@@ -114,9 +115,13 @@ function pageLoading(isLoading) {
 
     if (isLoading === true) {
         pageOnLoad.classList.remove('hidden');
-    }else{
-        pageOnLoad.classList.add('hidden');
+    } else {
+        setTimeout(() => {
+            pageOnLoad.classList.add('hidden');
+        }, 2000);
     }
 }
+
+
 
 loadData();
