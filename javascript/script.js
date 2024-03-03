@@ -23,7 +23,7 @@ const loadPost = (data) => {
 
         const div = document.createElement('div');
 
-        div.className = 'bg-neutral-200 rounded-3xl p-10 flex justify-between items-start gap-x-6';
+        div.className = 'bg-neutral-200 rounded-3xl p-4 lg:p-10 flex justify-between items-start gap-x-6';
 
         div.innerHTML = `
         <div class="relative bg-white">
@@ -32,7 +32,7 @@ const loadPost = (data) => {
             <div id="greenSignal" class="rounded-full w-[15px] h-[15px] absolute -right-1 -top-1 ${element.isActive ? 'bg-green-600' : 'bg-red-600'} ">
             </div>
         </div>
-        <div class="lg:flex-1">
+        <div class="flex-1">
             <div class="border-b-2 border-neutral-400 border-dashed">
                 <div class="font-inter text-sm font-medium text-neutral-500 flex flex-col lg:flex-row gap-y-2 lg:gap-y-0 lg:gap-x-5">
                     <h6>#<span>${element.category}</span></h6>
@@ -163,7 +163,6 @@ const postsPrint = (element) => {
     });
 
 }
-
 
 loadData();
 
