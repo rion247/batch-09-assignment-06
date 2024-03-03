@@ -57,13 +57,13 @@ const loadPost = (data) => {
                         <h6>${element.posted_time}</h6>
                     </div>
             </div>
-            <div class="flex gap-x-3 items-center cursor-pointer" onclick='markAsRead("${element.title}",${element.view_count})'>
+            <div class="flex gap-x-3 items-center cursor-pointer" onclick='markAsRead("${element.title.replace(/'/g, '')}",${element.view_count})'>
                 <img class="w-7 h-7" src="images/emailicon.png" alt="...Loading" id="mark-read">
             </div>
         </div>                        
         `;
 
-        discussPrint.appendChild(div);      
+        discussPrint.appendChild(div);
 
     });
 }
@@ -121,6 +121,53 @@ function pageLoading(isLoading) {
     }
 }
 
+const latestPosts = async () => {
+
+    const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
+
+    const data = await response.json();
+
+    postsPrint(data);
+
+}
+
+const postsPrint = (element) => {
+    const postPrint = document.getElementById('post-print');
+
+    element.forEach(card => {
+        console.log(card);
+
+        const div = document.createElement('div');
+        div.className = 'p-6 border border-slate-300 rounded-3xl';
+        div.innerHTML = `
+        <div>
+            <img class="rounded-2xl w-80 h-48" src="${card.cover_image}" alt="...Loading">
+        </div>
+        <div class="flex gap-x-3 items-center my-6">
+            <img class="w-5 h-5" src="images/date.png" alt="...Loading">
+            <h6 class="text-base font-normal text-neutral-400">${card.author?.posted_date??'No publish date'}</h6>
+        </div>
+        <h4 class="text-lg font-extrabold w-80 mb-3">${card.title}</h4>
+        <p class="text-neutral-500 w-80 text-start leading-6 font-normal mb-4">${card.description}</p>
+        <div class="flex justify-start items-center gap-x-4">
+            <div>
+                <img class="w-11 h-11 rounded-full flex items-center" src="${card.profile_image}" alt="...Loading">
+            </div>
+            <div>
+                <h4 class="text-base font-bold text-black mb-1">${card.author.name}</h4>
+                <h6 class="text-sm font-normal text-neutral-400">${card.author.designation??"Unknown"}</h6>
+            </div>
+        </div>
+        `;
+
+        postPrint.appendChild(div);
+
+    });
+    
+}
+
 
 
 loadData();
+
+latestPosts();
