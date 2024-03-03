@@ -19,7 +19,6 @@ const loadPost = (data) => {
     const discussPrint = document.getElementById('discuss-print');
     discussPrint.textContent = '';
 
-
     data.forEach(element => {
 
         const div = document.createElement('div');
@@ -135,7 +134,6 @@ const postsPrint = (element) => {
     const postPrint = document.getElementById('post-print');
 
     element.forEach(card => {
-        console.log(card);
 
         const div = document.createElement('div');
         div.className = 'p-6 border border-slate-300 rounded-3xl';
@@ -163,9 +161,8 @@ const postsPrint = (element) => {
         postPrint.appendChild(div);
 
     });
-    
-}
 
+}
 
 
 loadData();
