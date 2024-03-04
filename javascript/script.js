@@ -26,7 +26,7 @@ const loadPost = (data) => {
         div.className = 'bg-neutral-200 rounded-3xl p-6 lg:p-10 flex flex-col lg:flex-row justify-between items-center lg:items-start gap-x-6';
 
         div.innerHTML = `
-        <div class="relative bg-white mb-4 lg:mb-0">
+        <div class="relative bg-white mb-4 lg:mb-0 rounded-2xl">
             <div class="flex justify-center items-center w-[72px] h-[72px]"><img
                 src="${element.image}" alt="...Loading" class="rounded-2xl"></div>
             <div id="greenSignal" class="rounded-full w-[15px] h-[15px] absolute -right-1 -top-1 ${element.isActive ? 'bg-green-600' : 'bg-red-600'} ">
@@ -145,8 +145,8 @@ const postsPrint = (element) => {
             <img class="w-5 h-5" src="images/date.png" alt="...Loading">
             <h6 class="text-base font-normal text-neutral-400">${card.author?.posted_date ?? 'No publish date'}</h6>
         </div>
-        <h4 class="text-lg font-extrabold w-80 mb-3">${card.title}</h4>
-        <p class="text-neutral-500 w-80 text-start leading-6 font-normal mb-4">${card.description}</p>
+        <h4 class="text-base lg:text-lg font-extrabold w-80 mb-3">${card.title}</h4>
+        <p class="text-neutral-500 w-80 text-start leading-6 font-normal mb-4 text-base">${card.description}</p>
         <div class="flex justify-start items-center gap-x-4">
             <div>
                 <img class="w-11 h-11 rounded-full flex items-center" src="${card.profile_image}" alt="...Loading">
