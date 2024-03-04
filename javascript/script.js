@@ -53,7 +53,7 @@ const loadPost = (data) => {
                     </div>
                     <div class="flex gap-1 lg:gap-x-3 items-center">
                         <img class="w-5 h-5" src="images/clockicon.png" alt="...Loading">
-                        <h6>${element.posted_time}</h6>
+                        <h6>${element.posted_time}<span> min</span></h6>
                     </div>
             </div>
             <div class="translate-x-40 lg:translate-x-0 flex gap-x-3 items-center cursor-pointer" onclick='markAsRead("${element.title.replace(/'/g, '')}",${element.view_count})'>
